@@ -82,6 +82,42 @@ bool search(node* head,int key)
 }
 
 
+void delete_at_head(node* &head)
+{
+    node* todelete=head;
+    
+    head=head->next;
+    
+    delete todelete;
+}
+
+void deletion(node* &head,int val)
+{
+    if(head==NULL) return; // if empty linked list
+    
+    if(head->next==NULL)  // if linked list of size 1
+    {
+        delete_at_head(head);
+        
+        return;
+    }
+    
+    node* temp=head;
+    
+    while(temp->next->data!=val)
+    {
+        temp=temp->next;
+    }
+    
+    node* todelete=temp->next;
+    
+    temp->next=temp->next->next;
+    
+    delete todelete;
+    
+}
+
+
 int main() {
   
      node* head=NULL;
@@ -104,6 +140,17 @@ int main() {
      
      if(search(head,20)) cout<<"present"<<endl;
      else cout<<"absent"<<endl;
+     
+     deletion(head,10);
+     
+     display(head);
+     
+     insert_at_tail(head,10);
+     display(head);
+     
+     delete_at_head(head);
+     
+     display(head);
      
   
   
