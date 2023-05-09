@@ -1,0 +1,28 @@
+
+class Solution
+{
+    public:
+    //Function to remove a loop in the linked list.
+    void removeLoop(Node* head)
+    {
+        map<Node*,int>mp;
+        
+        Node* prev=NULL;
+        Node* curr=head;
+        
+        while(curr!=NULL)
+        {
+            if(mp.find(curr)!=mp.end())  // if curr ptr is present 
+            {
+                prev->next=NULL;
+                break;
+            }
+            
+            mp[curr]++;
+            
+            prev=curr;
+            
+            curr=curr->next;
+        }
+    }
+};
