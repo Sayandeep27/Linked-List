@@ -1,0 +1,39 @@
+
+class Solution
+{
+    public:
+    
+    int add(Node* temp)
+    {
+        if(temp->next==NULL)
+        {
+            int x=((temp->data)+1)/10;
+            
+            temp->data=((temp->data)+1)%10;
+            
+            return x;
+        }
+        
+        int carry=add(temp->next);
+        int y=((temp->data)+carry)/10;
+        
+        temp->data=((temp->data)+carry)%10;
+        
+        return y;
+        
+    }
+    
+    Node* addOne(Node *head) 
+    {
+        int carry=add(head);
+        
+        if(carry==0) return head;
+        
+        Node* temp=new Node(carry);
+        
+        temp->next=head;
+        
+        return temp;
+       
+    }
+};
