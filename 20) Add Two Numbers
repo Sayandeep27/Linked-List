@@ -3,39 +3,53 @@ class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
          
-         ListNode* dummy=new ListNode();
+    ListNode* dummy=new ListNode();
 
-         ListNode* temp=dummy;
+    ListNode* current=dummy;
 
-         int carry=0;
+    // Variable to handle carry over during addition.
+    int carry = 0;
 
-         while(l1!=NULL or l2!=NULL or carry!=0)
+    // Loop until both l1 and l2 are exhausted and there is no carry left
+
+    while (l1 != nullptr || l2 != nullptr || carry != 0) 
+    {
+        // Start with the carry value from the previous addition.
+        int sum = carry;
+        
+        // If l1 is not exhausted, add its value to sum and move to the next node.
+        if (l1 != nullptr) 
+        {
+            sum += l1->val;
+            l1 = l1->next;
+        }
+
+
+        // If l2 is not exhausted, add its value to sum and move to the next node.
+        if (l2 != nullptr) 
          {
-             int sum=0;
+            sum += l2->val;
+            l2 = l2->next;
+        }
+        
+        // Calculate the new carry (either 0 or 1) for the next digit.
+        carry = sum / 10;
+        
+        // Create a new node with the digit value (sum % 10) and attach it to the current node.
+        current->next = new ListNode(sum % 10);
+        
+        // Move the current pointer to the newly created node.
+        current = current->next;
+    }
 
-             if(l1!=NULL)
-             {
-                sum+=(l1->val);
-                l1=l1->next;
-             }
-
-             if(l2!=NULL)
-             {
-                 sum+=(l2->val);
-                 l2=l2->next;
-             }
-
-             sum+=carry;
-
-             carry=sum/10;
+    // Return the head of the new list, which is the next node after the dummy node.
+    return dummy.next;
+}
 
 
-             ListNode* node=new ListNode(sum%10);
 
-             temp->next=node;
-             temp=temp->next;
-         }
 
-         return dummy->next;
+
+
     }
 };
