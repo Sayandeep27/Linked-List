@@ -12,26 +12,32 @@ class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
          
-          if(head==NULL) return NULL;
+          if(head==NULL) return NULL;  // Check if the list is initially empty
 
-          int len=0;
+          int len=0;    // Variable to store the length of the linked list
 
-          ListNode* temp=head;
+          ListNode* temp=head;     // Temporary pointer to traverse the list
 
+
+          // Calculate the length of the linked list
           while(temp!=NULL)
           {
               temp=temp->next;
               len++;
           }
 
-          int target=len-n;
+          int target=len-n;   // Calculate the position of the node to be removed from the start
 
+
+          // If the node to be removed is the first node
           if(target==0)
           {
-              head=head->next;
+              head=head->next;  // Move head to the next node
               return head;
           }
 
+
+          // Recursively remove the nth node from the end
           head->next=removeNthFromEnd(head->next,n);
 
           return head;
