@@ -3,21 +3,26 @@ class Solution {
 public:
     ListNode* oddEvenList(ListNode* head) {
      
-        if(head==NULL or head->next==NULL) return head;
+        if(head==NULL or head->next==NULL) return head;   // Check if the list is empty or has only one node
     
-        ListNode* odd=head;
-        ListNode* even=head->next;
-        ListNode* joint=even;
+        ListNode* odd=head;   // Pointer to the current odd-indexed node
+        ListNode* even=head->next;   // Pointer to the current even-indexed node
+        ListNode* joint=even;    // Pointer to the start of the even-indexed list
 
+        // Traverse through the list to rearrange nodes
         while(even!=NULL and even->next!=NULL)
         {
+            // Link odd-indexed nodes
             odd->next=even->next;
             odd=odd->next;
 
+            // Link even-indexed nodes
             even->next=odd->next;
             even=even->next;
         }
 
+
+        // Join the end of the odd-indexed list with the start of the even-indexed list
         odd->next=joint;
 
         return head;
