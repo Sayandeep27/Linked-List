@@ -43,12 +43,7 @@ public:
     }
 
     // Return the head of the new list, which is the next node after the dummy node.
-    return dummy.next;
-}
-
-
-
-
+    return dummy->next;
 
 
     }
