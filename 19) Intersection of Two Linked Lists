@@ -3,12 +3,14 @@ class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
           
-          ListNode* ptr1=headA;
-          ListNode* ptr2=headB;
+          ListNode* ptr1=headA;    // Pointer for list A
+          ListNode* ptr2=headB;    // Pointer for list B
 
+           // Traverse both lists until they either meet at the intersection or reach the end (NULL)
           while(ptr1!=ptr2)
           {
-              if(ptr1==NULL)
+              // Move ptr1 forward; if it reaches the end, redirect it to headB
+              if(ptr1==NULL) 
               {
                   ptr1=headB;
               }
@@ -17,6 +19,8 @@ public:
                   ptr1=ptr1->next;
               }
 
+           
+              // Move ptr2 forward; if it reaches the end, redirect it to headA
               if(ptr2==NULL)
               {
                   ptr2=headA;
@@ -27,6 +31,8 @@ public:
               }
           }
 
+           
+          // If ptr1 and ptr2 are equal, they point to the intersection (or NULL if no intersection)
           return ptr1;
     }
 };
