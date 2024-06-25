@@ -1,4 +1,44 @@
 
+ListNode* rotateRight(ListNode* head, int k) {
+   
+if (!head || k == 0) return head;
+
+    // Find the length of the linked list
+    ListNode* temp = head;
+
+    int length = 1;
+
+    while (temp->next) 
+    {
+        temp = temp->next;
+        length++;
+    }
+
+    // Connect the last node to the head to make it circular
+    temp->next = head;
+
+    // Find the new tail and the new head
+
+    k = k % length; // Effective rotation
+
+    int stepsToNewHead = length - k;
+
+    ListNode* newTail = head;
+
+    for (int i = 1; i < stepsToNewHead; i++) 
+    {
+        newTail = newTail->next;
+    }
+
+    ListNode* newHead = newTail->next;
+
+    newTail->next = nullptr; // Break the circular link
+
+    return newHead;
+}
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
