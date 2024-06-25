@@ -33,23 +33,28 @@ public:
 
     bool isPalindrome(ListNode* head) {
         
-       if(head==NULL or head->next==NULL) return true;
+       if(head==NULL or head->next==NULL) return true;  // Check if the list is empty or has only one node
 
        ListNode* slow=head;
        ListNode* fast=head;
 
+       // Find the middle of the linked list using slow and fast pointers
        while(fast->next!=NULL and fast->next->next!=NULL)
        {
            slow=slow->next;
            fast=fast->next->next;
        }
 
+
+       // Reverse the second half of the linked list
        slow->next=reverse(slow->next);
 
-       slow=slow->next;
+       slow=slow->next;  // Move slow pointer to the start of the reversed second half
 
        ListNode* temp=head;
 
+
+       // Check palindrome condition by comparing first half with reversed second half
        while(slow!=NULL)
        {
            if(temp->val!=slow->val) return false;
