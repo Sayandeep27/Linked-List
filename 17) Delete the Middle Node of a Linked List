@@ -1,48 +1,27 @@
+void deleteMiddleNode(ListNode* head) 
+{
+        if (head == nullptr || head->next == nullptr) 
+        {
+            return; // No middle node to delete
+        }
+        
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* prev = nullptr;   // To keep track of the node before slow
+        
+        while (fast != nullptr && fast->next != nullptr) 
+        {
+            prev = slow;
+            slow = slow->next;
+            fast = fast->next->next;
+        }
 
-class Solution {
-public:
-    ListNode* deleteMiddle(ListNode* head) {
-         
-         int len=0;
 
-         ListNode* temp=head;
+        
+        // Now slow is pointing to the middle node
+        // Delete the middle node
+        prev->next = slow->next;
 
-         while(temp!=NULL)
-         {
-             temp=temp->next;
-             len++;
-         }
 
-         int mid=len/2;
-
-         int cnt=0;
-
-         temp=head;
-         ListNode* prevptr=NULL;
-
-         while(temp!=NULL)
-         {
-             if(cnt<mid)
-             {   
-                 prevptr=temp;
-                 temp=temp->next;
-
-                 cnt++;
-             }
-             else
-             {
-                if(prevptr==NULL)
-                {
-                    delete temp;
-                    return NULL;
-                }
-                
-                 prevptr->next=temp->next;
-                 delete temp;
-                 break;
-             }
-         }
-
-         return head;
+        delete slow;
     }
-};
