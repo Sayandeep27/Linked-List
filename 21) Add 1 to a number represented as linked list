@@ -1,39 +1,53 @@
-
-class Solution
+// Function to reverse a linked list
+ListNode* reverseList(ListNode* head) 
 {
-    public:
-    
-    int add(Node* temp)
+    ListNode* prev = nullptr;
+    ListNode* curr = head;
+
+    while (curr != nullptr) 
     {
-        if(temp->next==NULL)
-        {
-            int x=((temp->data)+1)/10;
-            
-            temp->data=((temp->data)+1)%10;
-            
-            return x;
-        }
-        
-        int carry=add(temp->next);
-        int y=((temp->data)+carry)/10;
-        
-        temp->data=((temp->data)+carry)%10;
-        
-        return y;
-        
+        ListNode* nextTemp = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = nextTemp;
     }
+
+    return prev;
+}
+
+
+
+// Function to add 1 to a number represented by a linked list
+ListNode* addOne(ListNode* head) 
+{
+    // Reverse the linked list
+    head = reverseList(head);
     
-    Node* addOne(Node *head) 
+    ListNode* current = head;
+    ListNode* prev = nullptr;
+
+    int carry = 1; // Initial carry is 1 because we are adding 1
+    
+    while (current != nullptr) 
     {
-        int carry=add(head);
-        
-        if(carry==0) return head;
-        
-        Node* temp=new Node(carry);
-        
-        temp->next=head;
-        
-        return temp;
-       
+        int sum = current->val + carry;
+        carry = sum / 10;
+        current->val = sum % 10;
+        prev = current;
+        current = current->next;
     }
-};
+
+
+    // If there is still a carry left, add a new node at the end
+    if (carry > 0) 
+    {
+        prev->next = new ListNode(carry);
+    }
+
+
+
+    // Reverse the list back to original order
+    head = reverseList(head);
+    
+    return head;
+}
