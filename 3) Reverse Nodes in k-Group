@@ -12,25 +12,30 @@ class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
             
-            if(head==NULL) return NULL;
+            if(head==NULL) return NULL;   // Base case: if the head is NULL, simply return NULL
 
-            int available=k;
-            int cnt=0;
+            int available=k;  // To count down from k to check if there are enough nodes to reverse
+            int cnt=0;   // Counter for the number of nodes reversed
 
-            ListNode* temp=head;
+            ListNode* temp=head;  // Temporary pointer to traverse the list
 
+       
+            // Traverse the list to check if there are at least k nodes available
             while(temp!=NULL and available>0)
             {
                 temp=temp->next;
                 available--;
             }
 
+      
+         // If there are exactly k nodes available(I mean minimum k nodes availavle), proceed with the reversal
          if(available==0)
          {
              ListNode* prevptr=NULL;
              ListNode* currptr=head;
              ListNode* nextptr;
-  
+
+             // Reverse k nodes
              while(currptr!=NULL and cnt<k)
              {
                  nextptr=currptr->next;
@@ -39,22 +44,23 @@ public:
                  prevptr=currptr;
                  currptr=nextptr;
 
-                 cnt++;
+                 cnt++;  // Increment the counter
              }
 
 
              if(nextptr!=NULL)
              {
-                 head->next=reverseKGroup(nextptr,k);
+                 head->next=reverseKGroup(nextptr,k);  // Recursively call reverseKGroup for the next part of the list
              }
 
 
-             return prevptr;
+             return prevptr;  // Return the new head after reversal (which is prevptr)
 
 
          }
 
 
+       // If there are less than k nodes left, return the head as it is
        return head;
 
 
